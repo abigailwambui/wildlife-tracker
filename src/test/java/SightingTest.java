@@ -1,6 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
+import java.util.Arrays;
 
 public class SightingTest {
 
@@ -59,6 +60,18 @@ public class SightingTest {
       Sighting secondSighting = new Sighting("TallBushes", "Mary Nyawira");
       secondSighting.save();
       assertEquals(Sighting.find(secondSighting.getId()), secondSighting);
+  }
+
+    @Test
+    public void getAnimals_retrievesAllAnimalsFromDatabase_animalsList() {
+      Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      testSighting.save();
+      Animal firstAnimal = new Animal("Elephants", "ill", "young", testSighting.getId());
+      firstAnimal.save();
+      Animal secondAnimal = new Animal("Zebras", "okay", "old", testSighting.getId());
+      secondAnimal.save();
+      Animal[] Animals = new Animal[] { firstAnimal, secondAnimal };
+      assertTrue(testSighting.getAnimals().containsAll(Arrays.asList(Animals)));
   }
 }
 

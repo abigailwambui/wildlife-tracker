@@ -72,8 +72,18 @@ public class AnimalTest {
     public void find_returnsAnimalWithSameId_secondAnimal() {
       Animal firstAnimal = new Animal("Elephants", "ill", "young", 1);
       firstAnimal.save();
-      Animal secondAnimal = new Animal("Zebras", "okay", "old", 1);
+      Animal secondAnimal = new Animal("Elephants", "ill", "young", 1);
       secondAnimal.save();
       assertEquals(Animal.find(secondAnimal.getId()), secondAnimal);
+  }
+
+    @Test
+    public void save_savesSightingIdIntoDB_true() {
+      Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      testSighting.save();
+      Animal testAnimal = new Animal("Elephants", "ill", "young", testSighting.getId());
+      testAnimal.save();
+      Animal savedAnimal = Animal.find(testAnimal.getId());
+      assertEquals(savedAnimal.getSightingId(), testSighting.getId());
   }
 }
