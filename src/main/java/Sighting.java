@@ -1,11 +1,13 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 public class Sighting {
     private String location;
     private String rangername;
     private int id;
+    private Timestamp date;
 
     public Sighting(String location, String rangername) {
         this.location = location;
@@ -25,6 +27,10 @@ public class Sighting {
       return id;
     }
 
+    public Timestamp getDate() {
+      return date;
+    }
+
     @Override
     public boolean equals(Object otherSighting){
         if (!(otherSighting instanceof Sighting)) {
@@ -32,17 +38,18 @@ public class Sighting {
         } else {
       Sighting newSighting = (Sighting) otherSighting;
       return this.getLocation().equals(newSighting.getLocation())&&
-             this.getRangerName().equals(newSighting.getRangerName());            
+             this.getRangerName().equals(newSighting.getRangerName());        
     }
   }
 
     public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (location, rangername) VALUES (:location, :rangername)";
-      con.createQuery(sql)
+      String sql = "INSERT INTO sightings (location, rangername, date) VALUES (:location, :rangername, now())";
+      this.id = (int) con.createQuery(sql, true)
         .addParameter("location", this.location)
         .addParameter("rangername", this.rangername)
-        .executeUpdate();
+        .executeUpdate()
+        .getKey();
     }
   }
 
@@ -53,16 +60,5 @@ public class Sighting {
     }
   }
 
-    public void save() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (location, rangername) VALUES (:location, :rangername)";
-      this.id = (int) con.createQuery(sql, true)
-        .addParameter("name", this.location)
-        .addParameter("email", this.rangername)
-        .executeUpdate()
-        .getKey();
-    }
-  }
-
-
+    
 }
