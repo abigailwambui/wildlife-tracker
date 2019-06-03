@@ -1,12 +1,15 @@
 import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sighting {
     private String location;
-    private String name;
+    private String rangername;
+    private int id;
 
-    public Sighting(String location, String name) {
+    public Sighting(String location, String rangername) {
         this.location = location;
-        this.name = name;
+        this.rangername = rangername;
         
     }
 
@@ -14,8 +17,8 @@ public class Sighting {
       return location;
     }
 
-    public String getName() {
-        return name;
+    public String getRangerName() {
+        return rangername;
     }
 
     @Override
@@ -25,17 +28,24 @@ public class Sighting {
         } else {
       Sighting newSighting = (Sighting) otherSighting;
       return this.getLocation().equals(newSighting.getLocation())&&
-             this.getName().equals(newSighting.getName());            
+             this.getRangerName().equals(newSighting.getRangerName());            
     }
   }
 
     public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (location, name) VALUES (:name, :location)";
+      String sql = "INSERT INTO sightings (location, rangername) VALUES (:location, :rangername)";
       con.createQuery(sql)
         .addParameter("location", this.location)
-        .addParameter("name", this.name)
+        .addParameter("rangername", this.rangername)
         .executeUpdate();
+    }
+  }
+
+    public static List<Sighting> all() {
+    String sql = "SELECT * FROM sightings";
+    try(Connection con = DB.sql2o.open()) {
+     return con.createQuery(sql).executeAndFetch(Sighting.class);
     }
   }
 

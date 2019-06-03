@@ -23,7 +23,7 @@ public class SightingTest {
     @Test
     public void getName_SightingInstantiatesWithRangerName_String(){
       Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
-      assertEquals("Martin Olelenku", testSighting.getName());
+      assertEquals("Martin Olelenku", testSighting.getRangerName());
   
   }
 
@@ -34,6 +34,14 @@ public class SightingTest {
       assertTrue(firstSighting.equals(anotherSighting));
     }
 
-
+    @Test
+    public void all_returnsAllInstancesOfSighting_true() {
+      Sighting firstSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      firstSighting.save();
+      Sighting secondSighting = new Sighting("TallBushes", "Mary Nyawira");
+      secondSighting.save();
+      assertEquals(true, Sighting.all().get(0).equals(firstSighting));
+      assertEquals(true, Sighting.all().get(1).equals(secondSighting));
+  }
 }
 
