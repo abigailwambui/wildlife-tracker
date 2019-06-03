@@ -19,4 +19,10 @@ public class SpecieTest {
       assertEquals("Homo sapiens", testSpecie.getName());
   }
 
+    @Test
+    public void Specie_instantiatesWithPopulation_int() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      assertEquals(30, testSpecie.getPopulation());
+  }
+
 }
