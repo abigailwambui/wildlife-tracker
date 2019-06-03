@@ -21,6 +21,10 @@ public class Sighting {
         return rangername;
     }
 
+    public int getId() {
+      return id;
+    }
+
     @Override
     public boolean equals(Object otherSighting){
         if (!(otherSighting instanceof Sighting)) {
@@ -46,6 +50,17 @@ public class Sighting {
     String sql = "SELECT * FROM sightings";
     try(Connection con = DB.sql2o.open()) {
      return con.createQuery(sql).executeAndFetch(Sighting.class);
+    }
+  }
+
+    public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO sightings (location, rangername) VALUES (:location, :rangername)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.location)
+        .addParameter("email", this.rangername)
+        .executeUpdate()
+        .getKey();
     }
   }
 
