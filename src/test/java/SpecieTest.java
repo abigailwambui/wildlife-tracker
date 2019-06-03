@@ -31,4 +31,17 @@ public class SpecieTest {
       assertEquals(false, testSpecie.getEndangered());
   }
 
+    @Test
+    public void Specie_instantiatesWithSightingId_int() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      assertEquals(1, testSpecie.getSightingId());
+  }
+
+    @Test
+    public void equals_returnsTrueIfAllInstancesIdAreSame_true() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      Specie anotherSpecie = new Specie("Homo sapiens", 30, false, 1);
+      assertTrue(testSpecie.equals(anotherSpecie));
+  }
+
 }
