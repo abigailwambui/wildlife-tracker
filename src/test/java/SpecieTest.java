@@ -44,4 +44,19 @@ public class SpecieTest {
       assertTrue(testSpecie.equals(anotherSpecie));
   }
 
+    @Test
+    public void save_returnsTrueIfDescriptionsAretheSame() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      testSpecie.save();
+      assertTrue(Specie.all().get(0).equals(testSpecie));
+  }
+
+    @Test
+    public void save_assignsIdToAnimal() {
+      Animal testAnimal = new Animal("Homo sapiens", 30, false, 1);
+      testAnimal.save();
+      Animal savedAnimal = Animal.all().get(0);
+      assertEquals(savedAnimal.getId(), testAnimal.getId());
+  }
+
 }
