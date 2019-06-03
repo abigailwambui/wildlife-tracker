@@ -59,4 +59,23 @@ public class SpecieTest {
       assertEquals(savedAnimal.getId(), testAnimal.getId());
   }
 
+    @Test
+    public void all_returnsAllInstancesOfSpecie_true() {
+      Specie firstSpecie = new Specie("Homo sapiens", 30, false, 1);
+      firstSpecie.save();
+      Specie secondSpecie = new Specie("Gazella", 15, true, 1);
+      secondSpecie.save();
+      assertEquals(true, Specie.all().get(0).equals(firstSpecie));
+      assertEquals(true, Specie.all().get(1).equals(secondSpecie));
+  }
+
+
+    @Test
+    public void find_returnsSpecieWithSameId_secondSpecie() {
+      Specie firstSpecie = new Specie("Homo sapiens", 30, false, 1);
+      firstSpecie.save();
+      Specie secondSpecie = new Specie("Gazella", 15, true, 1);
+      secondSpecie.save();
+      assertEquals(Specie.find(secondSpecie.getId()), secondSpecie);
+  }
 }

@@ -1,4 +1,6 @@
 import org.sql2o.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Specie {
     private String name;
@@ -57,6 +59,23 @@ public class Specie {
         .addParameter("sightingid", this.sightingId)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public static List<Specie> all() {
+    String sql = "SELECT * FROM species";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Specie.class);
+    }
+  }
+
+  public static Specie find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM species where id=:id";
+      Specie specie = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Specie.class);
+      return specie;
     }
   }
 }
