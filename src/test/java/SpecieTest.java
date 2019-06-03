@@ -25,4 +25,10 @@ public class SpecieTest {
       assertEquals(30, testSpecie.getPopulation());
   }
 
+    @Test
+    public void Specie_instantiatesWithEndangered_boolean() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      assertEquals(false, testSpecie.getEndangered());
+  }
+
 }
