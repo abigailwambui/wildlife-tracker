@@ -51,5 +51,14 @@ public class SightingTest {
       Sighting savedSighting = Sighting.all().get(0);
       assertEquals(testSighting.getId(), savedSighting.getId());
   }
+
+    @Test
+    public void find_returnsSightingWithSameId_secondSighting() {
+      Sighting firstSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      firstSighting.save();
+      Sighting secondSighting = new Sighting("TallBushes", "Mary Nyawira");
+      secondSighting.save();
+      assertEquals(Sighting.find(secondSighting.getId()), secondSighting);
+  }
 }
 
