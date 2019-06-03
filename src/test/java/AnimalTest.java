@@ -16,5 +16,13 @@ public class AnimalTest {
   
   }
 
+    @Test
+    public void equals_returnsTrueIfNameisSame_true() {
+      Animal firstAnimal = new Animal("Elephant");
+      Animal anotherAnimal = new Animal("Elephant");
+      assertTrue(firstAnimal.equals(anotherAnimal));
+    }
+
+
 }
 
