@@ -73,5 +73,26 @@ public class SightingTest {
       Animal[] Animals = new Animal[] { firstAnimal, secondAnimal };
       assertTrue(testSighting.getAnimals().containsAll(Arrays.asList(Animals)));
   }
+
+    @Test
+    public void getSpecies_retrievesAllSpeciesFromDatabase_speciesList() {
+      Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      testSighting.save();
+      Specie firstSpecie = new Specie("Homo sapiens", 30, false, testSighting.getId());
+      firstSpecie.save();
+      Specie secondSpecie = new Specie("Gazella", 15, true, testSighting.getId());
+      secondSpecie.save();
+      Specie[] Species = new Specie[] { firstSpecie, secondSpecie };
+      assertTrue(testSighting.getSpecies().containsAll(Arrays.asList(Species)));
+  }
+
+    @Test
+    public void update_updatesSighttDescription_true() {
+        Sighting mySighting = new Sighting("Riverbed" , "Martin Olelenku");
+        mySighting.save();
+        mySighting.updateSighting("Grazing area", "Zion Jabari");
+        Sighting updated = new Sighting("Grazing area", "Zion Jabari");
+        assertEquals(updated.getLocation(), Sighting.find(mySighting.getId()).getLocation());
+    }
 }
 

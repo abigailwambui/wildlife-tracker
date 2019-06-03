@@ -69,7 +69,6 @@ public class SpecieTest {
       assertEquals(true, Specie.all().get(1).equals(secondSpecie));
   }
 
-
     @Test
     public void find_returnsSpecieWithSameId_secondSpecie() {
       Specie firstSpecie = new Specie("Homo sapiens", 30, false, 1);
@@ -77,5 +76,15 @@ public class SpecieTest {
       Specie secondSpecie = new Specie("Gazella", 15, true, 1);
       secondSpecie.save();
       assertEquals(Specie.find(secondSpecie.getId()), secondSpecie);
+  }
+
+    @Test
+    public void save_savesSightingIdIntoDB_true() {
+      Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+      testSighting.save();
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, testSighting.getId());
+      testSpecie.save();
+      Specie savedSpecie = Specie.find(testSpecie.getId());
+      assertEquals(savedSpecie.getSightingId(), testSighting.getId());
   }
 }

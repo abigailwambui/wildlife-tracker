@@ -79,5 +79,24 @@ public class Sighting {
     }
   }
 
-    
+    public List<Specie> getSpecies() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM species where personId=:id";
+      return con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeAndFetch(Specie.class);
+    }
+  }
+
+    public void updateSighting(String location, String rangername) {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "UPDATE stylists SET location = :location, rangername = :rangername, date = :date WHERE id = :id";
+            con.createQuery(sql)
+                    .addParameter("location", location)
+                    .addParameter("rangername", rangername)
+                    .addParameter("date", date)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
 }
