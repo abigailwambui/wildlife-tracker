@@ -15,4 +15,16 @@ public class Animal {
       return sightingId;
   }
 
+
+  @Override
+  public boolean equals(Object otherAnimal){
+    if (!(otherAnimal instanceof Animal)) {
+      return false;
+    } else {
+      Animal newAnimal = (Animal) otherAnimal;
+      return this.getName().equals(newAnimal.getName()) &&
+             this.getSightingId() == newAnimal.getSightingId();
+    }
+  }
+
 }

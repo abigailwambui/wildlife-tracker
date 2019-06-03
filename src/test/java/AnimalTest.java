@@ -20,8 +20,15 @@ public class AnimalTest {
   }
 
     @Test
-  public void animal_instantiatesWithSightingId_int() {
-    Animal testAnimal = new Animal("Elephants", 1);
-    assertEquals(1, testAnimal.getSightingId());
+    public void animal_instantiatesWithSightingId_int() {
+        Animal testAnimal = new Animal("Elephants", 1);
+        assertEquals(1, testAnimal.getSightingId());
+  }
+
+    @Test
+    public void equals_returnsTrueIfNameAndSightingIdAreSame_true() {
+        Animal testAnimal = new Animal("Elephants", 1);
+        Animal anotherAnimal = new Animal("Elephants", 1);
+        assertTrue(testAnimal.equals(anotherAnimal));
   }
 }
