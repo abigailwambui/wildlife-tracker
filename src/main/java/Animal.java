@@ -1,6 +1,9 @@
+import org.sql2o.*;
+
 public class Animal {
     private String name;
     private int sightingId;
+    private int id;
 
   public Animal(String name, int sightingId) {
       this.name = name;
@@ -15,6 +18,10 @@ public class Animal {
       return sightingId;
   }
 
+  public int getId(){
+    return id;
+  }
+
 
   @Override
   public boolean equals(Object otherAnimal){
@@ -27,6 +34,15 @@ public class Animal {
     }
   }
 
-  
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO animals (name, sightingid) VALUES (:name, :sightingId)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .addParameter("sightingId", this.sightingId)
+        .executeUpdate()
+        .getKey();
+    }
+  }
 
 }

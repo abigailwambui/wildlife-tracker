@@ -38,4 +38,12 @@ public class AnimalTest {
         testAnimal.save();
         assertTrue(Animal.all().get(0).equals(testAnimal));
   }
+
+    @Test
+    public void save_assignsIdToAnimal() {
+      Animal testAnimal = new Animal("Elephants", 1);
+      testAnimal.save();
+      Animal savedAnimal = Animal.all().get(0);
+      assertEquals(savedAnimal.getId(), testAnimal.getId());
+  }
 }
