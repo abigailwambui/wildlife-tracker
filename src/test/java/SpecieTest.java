@@ -87,4 +87,13 @@ public class SpecieTest {
       Specie savedSpecie = Specie.find(testSpecie.getId());
       assertEquals(savedSpecie.getSightingId(), testSighting.getId());
   }
+
+    @Test
+    public void update_updatesSpecieDescription_true() {
+        Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+        testSpecie.save();
+        testSpecie.updateSpecie("Homo sapiens", 30, false, 1);
+        Specie updated = new Specie("Panthera leo", 10, true, 1);
+        assertEquals(updated.getName(), Specie.find(testSpecie.getId()).getName());
+    }
 }

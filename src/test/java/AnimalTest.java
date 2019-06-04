@@ -86,4 +86,13 @@ public class AnimalTest {
       Animal savedAnimal = Animal.find(testAnimal.getId());
       assertEquals(savedAnimal.getSightingId(), testSighting.getId());
   }
+
+    @Test
+    public void update_updatesAnimalDescription_true() {
+        Animal testAnimal = new Animal("Elephants", "ill", "young", 1);
+        testAnimal.save();
+        testAnimal.updateAnimal("Lions", "healthy", "young", 1);
+        Animal updated = new Animal("Lions", "healthy", "young", 1);
+        assertEquals(updated.getName(), Animal.find(testAnimal.getId()).getName());
+    }
 }

@@ -90,7 +90,7 @@ public class Sighting {
 
     public void updateSighting(String location, String rangername) {
         try(Connection con = DB.sql2o.open()) {
-            String sql = "UPDATE stylists SET location = :location, rangername = :rangername, date = :date WHERE id = :id";
+            String sql = "UPDATE sightings SET location = :location, rangername = :rangername, date = :date WHERE id = :id";
             con.createQuery(sql)
                     .addParameter("location", location)
                     .addParameter("rangername", rangername)
