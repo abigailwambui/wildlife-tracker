@@ -88,11 +88,20 @@ public class SightingTest {
 
     @Test
     public void update_updatesSighttDescription_true() {
-        Sighting mySighting = new Sighting("Riverbed" , "Martin Olelenku");
-        mySighting.save();
-        mySighting.updateSighting("Grazing area", "Zion Jabari");
+        Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+        testSighting.save();
+        testSighting.updateSighting("Grazing area", "Zion Jabari");
         Sighting updated = new Sighting("Grazing area", "Zion Jabari");
-        assertEquals(updated.getLocation(), Sighting.find(mySighting.getId()).getLocation());
+        assertEquals(updated.getLocation(), Sighting.find(testSighting.getId()).getLocation());
+    }
+
+    @Test
+    public void delete_deletesSightings_true() {
+        Sighting testSighting = new Sighting("Riverbed" , "Martin Olelenku");
+        testSighting.save();
+        int testSightingId = testSighting.getId();
+        testSighting.delete();
+        assertEquals(null, Sighting.find(testSightingId));
     }
 }
 

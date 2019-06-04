@@ -52,11 +52,11 @@ public class SpecieTest {
   }
 
     @Test
-    public void save_assignsIdToAnimal() {
-      Animal testAnimal = new Animal("Homo sapiens", 30, false, 1);
-      testAnimal.save();
-      Animal savedAnimal = Animal.all().get(0);
-      assertEquals(savedAnimal.getId(), testAnimal.getId());
+    public void save_assignsIdToSpecie() {
+      Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+      testSpecie.save();
+      Specie savedSpecie = Specie.all().get(0);
+      assertEquals(savedSpecie.getId(), testSpecie.getId());
   }
 
     @Test
@@ -92,8 +92,17 @@ public class SpecieTest {
     public void update_updatesSpecieDescription_true() {
         Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
         testSpecie.save();
-        testSpecie.updateSpecie("Homo sapiens", 30, false, 1);
+        testSpecie.updateSpecie("Panthera leo", 10, true, 1);
         Specie updated = new Specie("Panthera leo", 10, true, 1);
         assertEquals(updated.getName(), Specie.find(testSpecie.getId()).getName());
+    }
+
+    @Test
+    public void delete_deleteSpecies_true() {
+        Specie testSpecie = new Specie("Homo sapiens", 30, false, 1);
+        testSpecie.save();
+        int testSpecieId = testSpecie.getId();
+        testSpecie.delete();
+        assertEquals(null, Specie.find(testSpecieId));
     }
 }

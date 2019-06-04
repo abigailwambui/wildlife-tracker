@@ -42,7 +42,7 @@ public class Specie {
       return false;
     } else {
       Specie newSpecie = (Specie) otherSpecie;
-      return this.getName() == newSpecie.getName() &&
+      return this.getName().equals(newSpecie.getName()) &&
              this.getPopulation() == newSpecie.getPopulation() &&
              this.getEndangered() == newSpecie.getEndangered() &&
              this.getSightingId() == newSpecie.getSightingId();
@@ -89,6 +89,15 @@ public class Specie {
           .addParameter("sightingId", sightingId)
           .addParameter("id", id)
           .executeUpdate();
+        }
+    }
+
+  public void delete() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM species WHERE id = :id;";
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
         }
     }
 }

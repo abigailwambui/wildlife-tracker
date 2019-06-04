@@ -95,4 +95,13 @@ public class AnimalTest {
         Animal updated = new Animal("Lions", "healthy", "young", 1);
         assertEquals(updated.getName(), Animal.find(testAnimal.getId()).getName());
     }
+
+    @Test
+    public void delete_deleteAnimals_true() {
+        Animal testAnimal = new Animal("Elephants", "ill", "young", 1);
+        testAnimal.save();
+        int testAnimalId = testAnimal.getId();
+        testAnimal.delete();
+        assertEquals(null, Animal.find(testAnimalId));
+    }
 }

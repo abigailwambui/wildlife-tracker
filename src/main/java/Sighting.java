@@ -72,7 +72,7 @@ public class Sighting {
 
     public List<Animal> getAnimals() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals where sightingId=:id";
+      String sql = "SELECT * FROM animals where sightingid=:id";
       return con.createQuery(sql)
         .addParameter("id", this.id)
         .executeAndFetch(Animal.class);
@@ -80,11 +80,11 @@ public class Sighting {
   }
 
     public List<Specie> getSpecies() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM species where personId=:id";
-      return con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeAndFetch(Specie.class);
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "SELECT * FROM species where sightingid=:id";
+        return con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeAndFetch(Specie.class);
     }
   }
 
@@ -95,6 +95,15 @@ public class Sighting {
                     .addParameter("location", location)
                     .addParameter("rangername", rangername)
                     .addParameter("date", date)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        }
+    }
+
+    public void delete() {
+        try(Connection con = DB.sql2o.open()) {
+            String sql = "DELETE FROM sightings WHERE id = :id;";
+            con.createQuery(sql)
                     .addParameter("id", id)
                     .executeUpdate();
         }
