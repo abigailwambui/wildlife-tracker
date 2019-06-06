@@ -23,17 +23,17 @@ public class App {
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-    get("/form-animals", (request, response) -> {
+    get("/form1", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("animals", Sighting.all());
-            model.put("template", "templates/form-animals.vtl");
+            model.put("animals", Animal.all());
+            model.put("template", "templates/form1.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-    get("/form-species", (request, response) -> {
+    get("/form2", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            model.put("species", Sighting.all());
-            model.put("template", "templates/form-species.vtl");
+            model.put("species", Specie.all());
+            model.put("template", "templates/form2.vtl");
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
