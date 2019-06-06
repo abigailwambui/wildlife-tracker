@@ -1,0 +1,11 @@
+<br><br><br><h1>specie list!</h1>
+#if ($species)
+    <ul>
+        #foreach ($specie in $species)
+            <li><a href="/species/$specie.getId()">$specie.getName()</a></li>
+        #end
+    </ul>
+#else
+    <p>No species!</p>
+#end 
+<br><br><br><a href="/form">Add New Specie</a>

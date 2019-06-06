@@ -1,0 +1,38 @@
+#if ($sighting)
+  <h1>Location: $sighting.getLocation()</h1>
+  <hr>
+  <h2>Sighted by: $sighting.getRangerName()</h2>
+  <hr>
+  <h2>On: $sighting.getDate()</h2>
+  <hr>
+  <h3><strong>ANIMALS:<strong></h3>
+  <ul>
+    #foreach($animal in $sighting.every())
+     <li><a href="/sightings/$sighting.getId()/animals/$animal.getId()">$animal.getName()</a></li>
+    #end
+  </ul>
+#else
+  <em><p>Oops! We can't seem to find that sighting.</p></em>
+#end
+
+<a href="/form">Add a new Animal</a><br><br>
+<a href="/sightings">All Sightings</a>
+<hr><br><br>
+
+<form action="/sightings/$sighting.getId()" method="post">
+  <label for="location">Location</label>
+  <input id="location" name="location" type="text">
+
+  <label for="rangername">Sighted by:</label>
+  <input id="rangername" name="rangername" type="text">
+
+  <label for="date">On</label>
+  <input id="date" name="date" type="text">
+
+  <br><br>
+  <button type="submit" class="btn btn-info">Update sighting</button>
+</form><br><br>
+
+<form action="/sightings/$sighting.getId()/delete" method="post">
+      <button type= "submit" class="btn btn-danger" id="delete-sighting">Delete sighting</button>
+ </form>     

@@ -1,0 +1,18 @@
+<br><br><br><h1>Sightings</h1>
+
+<h2> Sighting List: </h2>
+
+#if($sightings)
+  <p>Click on a sighting to see their animals:</p>
+  <ul>
+    #foreach ($sighting in $sightings)
+      <li><a href="/sightings/$sighting.getId()">$sighting.getLocation()</a></li><br><br>
+    #end
+  </ul>
+#else
+  <p>There are no sightings yet!</p>
+#end
+
+
+<br><br>
+<a href="/form">Add a new Sighting</a>

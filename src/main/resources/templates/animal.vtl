@@ -1,0 +1,34 @@
+<h1>Name: $animal.getName()</h1>
+<hr>
+<h2>Health status: $animal.getHealth()</h2>
+<hr>
+<h2>Age: $animal.getAge()</h2>
+<hr>
+<h2>SightingId: $animal.getSightingId()</h2>
+<h2> Belongs to: $sighting.getLocation()</h2>
+
+
+<h2>Edit animal:</h2><br><br>
+
+<form action="/sightings/$animal.getsightingId()/animals/$animal.getId()" method="post">
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text">
+
+  <label for="health">Health Status</label>
+  <input id="health" name="health" type="text">
+
+  <label for="age">Age</label>
+  <input id="age" name="age" type="text">
+
+  <label for="sightingId">SightingId</label>
+  <input id="sightingId" name="sightingId" type="text"><br><br>
+
+
+  <button type="submit" class="btn btn-info">Update animal</button>
+</form><br><br>
+
+<form action="/sightings/$animal.getsightingId()/animals/$animal.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-animal">Delete animal</button>
+</form><br><br>
+
+<a href="/sightings/$sighting.getId()">Return to $sighting.getName()</a>
