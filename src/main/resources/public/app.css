@@ -1,6 +1,7 @@
 body{
     background-image: url("../images/image3.jpg");
-    color: blanchedalmond;
+    color: black;
+    text-align: center;
 }
 
 h1{
@@ -9,4 +10,17 @@ h1{
 h2{
     font-family: 'Cinzel', serif;
 }
-
+.btn{
+    transition: all .4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    margin-left: 10em;
+    font-color: black;
+    font-style: italic;
+  }
+  
+.btn:hover {
+    box-shadow: 0 0 5px 2px black;
+    opacity: 0.7;
+  }
+a{
+    color: goldenrod;
+}

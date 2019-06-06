@@ -90,17 +90,20 @@ public class App {
             int sightingId = Integer.parseInt(request.queryParams("sightingId"));
             Specie newSpecie = new Specie(name, population, endangered, sightingId);
             newSpecie.save();
-            model.put("template", "templates/success.vtl");
+            String url = String.format("/success");
+            response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
+        
     post("/sightings", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             String rangername = request.queryParams("rangername");
             String location = request.queryParams("location");
             Sighting newSighting = new Sighting(rangername, location);
             newSighting.save();
-            model.put("template", "templates/success.vtl");
+            String url = String.format("/success");
+            response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
@@ -112,7 +115,8 @@ public class App {
             int sightingId = Integer.parseInt(request.queryParams("sightingId"));
             Animal newAnimal = new Animal(name, health, age, sightingId);
             newAnimal.save();
-            model.put("template", "templates/success.vtl");
+            String url = String.format("/success");
+            response.redirect(url);
             return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
