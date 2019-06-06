@@ -1,11 +1,14 @@
-<br><br><br><h1>specie list!</h1>
+<br><br><br><h1>specie list!</h1><br><br><br><br>
+<div class = "card">
 #if ($species)
     <ul>
         #foreach ($specie in $species)
             <li><a href="/species/$specie.getId()">$specie.getName()</a></li>
         #end
     </ul>
+</div><br><br><br>
 #else
+
     <p>No species!</p>
 #end 
 <br><br><br><button type="submit" class="btn btn-outline-dark block"><a href="/form2">Add New Specie</a></button>

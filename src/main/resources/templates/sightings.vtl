@@ -1,5 +1,6 @@
-<br><br><br><h1>Sightings</h1>
+<br><br><br><h1>Sightings</h1><br><br><br><br>
 
+<div class = "card">
 <h2> Sighting List: </h2>
 
 #if($sightings)
@@ -9,6 +10,7 @@
       <li><a href="/sightings/$sighting.getId()">$sighting.getLocation()</a></li><br><br>
     #end
   </ul>
+</div><br><br><br>
 #else
   <p>There are no sightings yet!</p>
 #end
